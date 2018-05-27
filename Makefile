@@ -13,4 +13,12 @@ run:
 		-signing-key stash/signing.key \
 		-config stash/config.yaml
 
+token:
+	go run cmd/credstore-tokengen/main.go -signing-key stash/signing.key -client $(client)
+
+setup:
+	mkdir stash
+	touch stash/config.yaml
+	go run cmd/credstore-keygen/main.go
+
 .PHONY: run

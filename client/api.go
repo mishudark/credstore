@@ -43,6 +43,10 @@ func GetSigningKey(ctx context.Context, conn *grpc.ClientConn, tok string) (cryp
 	}
 
 	pubkey, err := x509.ParsePKIXPublicKey(repl.GetSigningKey())
+	if err != nil {
+		return nil, err
+	}
+
 	if k, ok := pubkey.(crypto.PublicKey); ok {
 		return k, nil
 	}
